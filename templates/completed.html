@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversion Completed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #007BFF;
+        }
+
+        p {
+            margin: 20px 0;
+        }
+
+        a.button {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        a.button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Conversion Completed</h1>
+    <p>Your HTML has been successfully converted to DOCX.</p>
+    <p>Download your converted file:</p>
+    <a href="{{ url_for('index') }}" class="button">Back to Home</a>
+    <a href="/static/output.docx" class="button">Download DOCX</a>
+</body>
+</html>
