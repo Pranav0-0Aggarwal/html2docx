@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML to DOCX Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+        }
+
+        h1 {
+            color: #333;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #0056b3, #003982);
+        }
+
+        /* Style for the file input */
+        input[type="file"] {
+            background-color: #f7f7f7;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+
+        /* Style for the URL input form */
+        form[action="/convert_url"] {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        input[name="url"] {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <h1>HTML to DOCX Converter</h1>
+
+    <form action="/convert" method="POST">
+        <textarea name="html_content" placeholder="Enter HTML content"></textarea>
+        <button type="submit">Convert HTML to DOCX</button>
+    </form>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload HTML File</button>
+    </form>
+
+    <form action="/convert_url" method="POST">
+        <input type="text" name="url" placeholder="Enter URL to static webpage">
+        <button type="submit">Convert URL to DOCX</button>
+    </form>
+</body>
+
+</html>
