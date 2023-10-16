@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, send_file
 from docx import Document
-from htmldocx2 import HtmlToDocx
+from htmldocx import HtmlToDocx
 import requests
 import logging
 
