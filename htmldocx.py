@@ -2,6 +2,7 @@ from docx import Document
 from docx.shared import Pt
 from docx.shared import RGBColor
 from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH
 import base64
 import binascii
 import http
@@ -19,7 +20,6 @@ import docx, docx.table
 from docx.image.exceptions import UnrecognizedImageError
 from docx.image.image import Image
 from docx.shared import RGBColor, Pt, Inches
-from docx.enum.text import WD_COLOR, WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 
 from bs4 import BeautifulSoup
@@ -53,20 +53,10 @@ def get_filename_from_url(url):
     return os.path.basename(urlparse(url).path)
 
 def is_url(url):
-    """
-    Not to be used for actually validating a url, but in our use case we only 
-    care if it's a url or a file path, and they're pretty distinguishable
-    """
     parts = urlparse(url)
     return all([parts.scheme, parts.netloc, parts.path])
 
 def fetch_image(url):
-    """
-    Attempts to fetch an image from a url. 
-    If successful returns a bytes object, else returns None
-
-    :return:
-    """
     try:
         with urllib.request.urlopen(url) as response:
 
@@ -249,6 +239,8 @@ class HtmlToDocx(HTMLParser):
         if not self.include_images:
             self.skip = True
             self.skip_tag = 'img'
+            return
+        if('src' not in current_attrs.keys()):
             return
         src = current_attrs['src']
         # fetch image
@@ -578,10 +570,14 @@ class HtmlToDocx(HTMLParser):
     def parse_html_string(self, html, filename_docx=None):
         self.set_initial_attrs()
         self.run_process(html)
-        
-        if not filename_docx:
-            filename_docx = '/Users/pranavaggarwal/Documents/stgi/static/output'  # Default filename
-        
-        self.doc.save('/Users/pranavaggarwal/Documents/stgi/static/output.docx')
-        return filename_docx
 
+        if not filename_docx:
+            filename_docx = "static/output.docx"
+
+
+        if not os.path.exists(filename_docx):
+            with open(filename_docx, 'w'):
+                pass
+
+        self.doc.save(filename_docx)
+        return filename_docx
