@@ -13,6 +13,7 @@ script_dir = os.path.dirname(os.path.realpath(__file__))
 def index():
     return render_template('index.html')
 
+
 @app.route('/completed')
 def completed():
     return render_template('completed.html')
@@ -43,16 +44,18 @@ def upload():
 def convert_url():
     try:
         url = request.form['url']
+        if("https://" not in url):
+            url = "https://" + url
         response = requests.get(url)
         if response.status_code == 200:
             html_content = response.text
             doc = convert_html_to_docx(html_content)
             output_file = os.path.join(script_dir, 'static', 'output.docx')
-            return redirect(url_for('download'))
+            return redirect(url_for('completed'))
         else:
             return 'Error: Could not retrieve URL content'
     except Exception as e:
-        logging.exception(f'Error converting URL: {e}')
+        print(str(e))
         return 'Error: Could not convert URL'
 
 @app.route('/download')
